@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Make an AJAX request to the server
     $.ajax({
-        url: 'https://a921-121-52-154-72.ngrok-free.app/',  // Your server endpoint
+        url: 'https://a921-121-52-154-72.ngrok-free.app/chat',  // Your server endpoint
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ message: message }),
