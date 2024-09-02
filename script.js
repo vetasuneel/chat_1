@@ -50,23 +50,25 @@
             background-color: #ffffff;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            display: none;
+            display: flex;
             flex-direction: column;
             z-index: 1001;
             transform: translateY(100%);
             opacity: 0;
             transition: transform 0.4s ease, opacity 0.4s ease;
+            visibility: hidden;
         }
 
         .chat-container.open {
-            display: flex;
             transform: translateY(0);
             opacity: 1;
+            visibility: visible;
         }
 
         .chat-container.close {
             transform: translateY(100%);
             opacity: 0;
+            visibility: hidden;
         }
 
         .chat-header {
@@ -91,7 +93,7 @@
             padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
-            height: 350px;
+            height: 300px;
         }
 
         .chat-input {
@@ -294,14 +296,15 @@
 
         <div class="chat-container" id="chat-container">
             <div class="chat-header">
-                <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_14/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
+                <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_15/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
                 <span class="close-btn" id="close-btn">&times;</span>
             </div>
             <div id="chat-box" class="chat-box">
                 <div class="predefined-inputs" id="predefined-inputs">
-                    <div class="predefined-btn" data-message="What are your hours?">What are your hours?</div>
-                    <div class="predefined-btn" data-message="What services do you offer?">What services do you offer?</div>
-                    <div class="predefined-btn" data-message="Can I make a reservation?">Can I make a reservation?</div>
+                    <div class="predefined-btn" data-message="AI White Label">AI White Label?</div>
+                    <div class="predefined-btn" data-message="E-Commerce White Label">E-Commerce White Label</div>
+                    <div class="predefined-btn" data-message="Marketing White Label">Marketing White Label</div>
+                    <div class="predefined-btn" data-message="Affiliate Mega">Affiliate Mega</div>
                 </div>
             </div>
             <div id="typing-indicator" class="typing-indicator" style="display: none;">
@@ -332,11 +335,7 @@
             if (chatContainer.classList.contains('open')) {
                 chatContainer.classList.remove('open');
                 chatContainer.classList.add('close');
-                setTimeout(() => {
-                    chatContainer.style.display = 'none';
-                }, 400); // Match the duration of the close animation
             } else {
-                chatContainer.style.display = 'flex';
                 chatContainer.classList.remove('close');
                 chatContainer.classList.add('open');
                 userInput.focus();
@@ -347,9 +346,6 @@
         closeBtn.addEventListener('click', function() {
             chatContainer.classList.remove('open');
             chatContainer.classList.add('close');
-            setTimeout(() => {
-                chatContainer.style.display = 'none';
-            }, 400); // Match the duration of the close animation
         });
 
         sendBtn.addEventListener('click', function() {
