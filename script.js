@@ -302,7 +302,7 @@
 
             // Make an AJAX request to the server
             $.ajax({
-                url: 'https://b377-121-52-154-72.ngrok-free.app/chat',  // Replace with your server endpoint
+                url: 'https://9454-121-52-154-72.ngrok-free.app/chat',  // Replace with your server endpoint
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ message: message }),
