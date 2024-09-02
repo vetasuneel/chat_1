@@ -42,7 +42,7 @@
 
         .chat-container {
             position: fixed;
-            bottom: 90px;
+            bottom: 20px;
             right: 20px;
             width: 350px;
             max-width: 90%;
@@ -53,6 +53,20 @@
             display: none;
             flex-direction: column;
             z-index: 1001;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .chat-container.open {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-container.close {
+            transform: translateY(100%);
+            opacity: 0;
         }
 
         .chat-header {
@@ -77,7 +91,7 @@
             padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
-            height: 300px;
+            height: 350px;
         }
 
         .chat-input {
@@ -280,7 +294,7 @@
 
         <div class="chat-container" id="chat-container">
             <div class="chat-header">
-                <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_13/main/idea_pad.png" style="width: 120px; text-align: center;" alt=""></center>
+                <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_14/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
                 <span class="close-btn" id="close-btn">&times;</span>
             </div>
             <div id="chat-box" class="chat-box">
@@ -315,15 +329,27 @@
         const typingIndicator = document.getElementById('typing-indicator');
 
         chatIcon.addEventListener('click', function() {
-            chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
-            if (chatContainer.style.display === 'flex') {
+            if (chatContainer.classList.contains('open')) {
+                chatContainer.classList.remove('open');
+                chatContainer.classList.add('close');
+                setTimeout(() => {
+                    chatContainer.style.display = 'none';
+                }, 400); // Match the duration of the close animation
+            } else {
+                chatContainer.style.display = 'flex';
+                chatContainer.classList.remove('close');
+                chatContainer.classList.add('open');
                 userInput.focus();
                 scrollToBottom();
             }
         });
 
         closeBtn.addEventListener('click', function() {
-            chatContainer.style.display = 'none';
+            chatContainer.classList.remove('open');
+            chatContainer.classList.add('close');
+            setTimeout(() => {
+                chatContainer.style.display = 'none';
+            }, 400); // Match the duration of the close animation
         });
 
         sendBtn.addEventListener('click', function() {
