@@ -357,14 +357,17 @@
 
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_17/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_18/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
                     <div class="predefined-inputs" id="predefined-inputs">
-                        <div class="predefined-btn" data-message="What are your hours?">What are your hours?</div>
-                        <div class="predefined-btn" data-message="What services do you offer?">What services do you offer?</div>
-                        <div class="predefined-btn" data-message="Can I make a reservation?">Can I make a reservation?</div>
+                        <div class="predefined-btn" data-message="AI White Label">AI White Label</div>
+                        <div class="predefined-btn" data-message="E-Commerce White Label">E-Commerce White Label</div>
+                        <div class="predefined-btn" data-message="Marketing White Label">Marketing White Label</div>
+                        <div class="predefined-btn" data-message="Affiliate Mega">Affiliate Mega</div>
+                        <div class="predefined-btn" data-message="Amazon Services">Amazon Services</div>
+
                     </div>
                 </div>
                 <div class="chat-input">
