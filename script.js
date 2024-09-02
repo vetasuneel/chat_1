@@ -303,31 +303,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function sendMessage(message) {
-        if (message === "") return;
-        userInput.value = '';
+    if (message === "") return;
+    userInput.value = '';
 
-        appendMessage('user', message);
+    appendMessage('user', message);
 
-        // Make an AJAX request to the server
-        $.ajax({
-            url: 'https://a921-121-52-154-72.ngrok-free.app/chat',  // Replace with your server endpoint
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ message: message }),
-            success: function(response) {
-                appendMessage('ai', response.response);
-                // Optionally append a link if provided
-                if (response.link) {
-                    appendMessage('ai', `<a href="${response.link}">${response.link}</a>`);
-                }
-                scrollToBottom();
-            },
-            error: function() {
-                appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
-                scrollToBottom();
+    // Make an AJAX request to the server
+    $.ajax({
+        url: 'https://a921-121-52-154-72.ngrok-free.app/',  // Your server endpoint
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ message: message }),
+        success: function(response) {
+            appendMessage('ai', response.response);
+            if (response.link) {
+                appendMessage('ai', `<a href="${response.link}">${response.link}</a>`);
             }
-        });
-    }
+            scrollToBottom();
+        },
+        error: function(xhr, status, error) {
+            console.log('AJAX Error:', status, error); // Log error to the console
+            appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
+            scrollToBottom();
+        }
+    });
+}
+
 
     function appendMessage(sender, content) {
         const chatBox = document.getElementById('chat-box');
