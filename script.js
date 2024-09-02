@@ -2,12 +2,10 @@
     // Inject CSS into the page
     const style = document.createElement('style');
     style.textContent = `
-        /* Universal Box Sizing */
         * {
             box-sizing: border-box;
         }
 
-        /* Chat Icon Styling */
         .chat-icon {
             position: fixed;
             bottom: 20px;
@@ -42,7 +40,6 @@
             transform: scale(1.1);
         }
 
-        /* Chat Container Styling */
         .chat-container {
             position: fixed;
             bottom: 90px;
@@ -58,7 +55,6 @@
             z-index: 1001;
         }
 
-        /* Chat Header Styling */
         .chat-header {
             background-color: white;
             padding: 15px;
@@ -76,16 +72,14 @@
             color: #956fd6;
         }
 
-        /* Chat Box Styling */
         .chat-box {
             flex-grow: 1;
             padding: 15px;
             overflow-y: auto;
             background-color: #f9f9f9;
-            height: 300px; /* Set a fixed height */
+            height: 300px;
         }
 
-        /* Chat Input Styling */
         .chat-input {
             display: flex;
             padding: 10px;
@@ -130,7 +124,6 @@
             color: white;
         }
 
-        /* Message Styling */
         .message {
             display: flex;
             align-items: flex-start;
@@ -182,7 +175,6 @@
             word-break: break-all;
         }
 
-        /* Enhanced Predefined Input Buttons */
         .predefined-inputs {
             display: flex;
             flex-direction: column;
@@ -247,7 +239,6 @@
                 <span class="close-btn" id="close-btn">&times;</span>
             </div>
             <div id="chat-box" class="chat-box">
-                <!-- Predefined Inputs -->
                 <div class="predefined-inputs" id="predefined-inputs">
                     <div class="predefined-btn" data-message="What are your hours?">What are your hours?</div>
                     <div class="predefined-btn" data-message="What services do you offer?">What services do you offer?</div>
@@ -324,8 +315,9 @@
                     scrollToBottom();
                 },
                 error: function(xhr, status, error) {
+                    const errorMsg = `Error: ${status} - ${error}`;
                     appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
-                    console.error('AJAX Error:', status, error);
+                    console.error('AJAX Error:', errorMsg, xhr.responseText);
                     scrollToBottom();
                 }
             });
