@@ -280,7 +280,7 @@
 
         <div class="chat-container" id="chat-container">
             <div class="chat-header">
-                <center><img src="idea_pad.png" style="width: 120px; text-align: center;" alt=""></center>
+                <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_13/main/idea_pad.png" style="width: 120px; text-align: center;" alt=""></center>
                 <span class="close-btn" id="close-btn">&times;</span>
             </div>
             <div id="chat-box" class="chat-box">
