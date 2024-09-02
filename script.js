@@ -294,34 +294,45 @@
             });
         });
 
-        function sendMessage(message) {
-            if (message === "") return;
-            userInput.value = '';
+       function sendMessage(message) {
+    if (message === "") return;
 
-            appendMessage('user', message);
+    userInput.value = '';
 
-            // Make an AJAX request to the server
-            $.ajax({
-                url: 'https://9454-121-52-154-72.ngrok-free.app/chat',  // Replace with your server endpoint
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ message: message }),
-                success: function(response) {
-                    appendMessage('ai', response.response);
-                    // Optionally append a link if provided
-                    if (response.link) {
-                        appendMessage('ai', `<a href="${response.link}">${response.link}</a>`);
-                    }
-                    scrollToBottom();
-                },
-                error: function(xhr, status, error) {
-                    const errorMsg = `Error: ${status} - ${error}`;
-                    appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
-                    console.error('AJAX Error:', errorMsg, xhr.responseText);
-                    scrollToBottom();
-                }
-            });
+    appendMessage('user', message);
+
+    console.log("Sending message:", message);
+
+    // Make an AJAX request to the server using Fetch API
+    fetch('https://b377-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Received response:", data);
+        appendMessage('ai', data.response);
+        // Optionally append a link if provided
+        if (data.link) {
+            appendMessage('ai', `<a href="${data.link}">${data.link}</a>`);
+        }
+        scrollToBottom();
+    })
+    .catch(error => {
+        console.error("Error during AJAX request:", error);
+        appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
+        scrollToBottom();
+    });
+}
+
 
         function appendMessage(sender, content) {
             const chatBox = document.getElementById('chat-box');
