@@ -304,7 +304,7 @@
     console.log("Sending message:", message);
 
     // Make an AJAX request to the server using Fetch API
-    fetch('https://b377-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
+    fetch('https://dbb7-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
