@@ -224,6 +224,51 @@
             color: black;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            margin-top: 10px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #333;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dot-blink 1.5s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes dot-blink {
+            0%, 20% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     `;
     document.head.appendChild(style);
 
@@ -245,6 +290,11 @@
                     <div class="predefined-btn" data-message="Can I make a reservation?">Can I make a reservation?</div>
                 </div>
             </div>
+            <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
             <div class="chat-input">
                 <input type="text" id="user-input" placeholder=" Type your message...">
                 <button id="send-btn">
@@ -262,6 +312,7 @@
         const closeBtn = document.getElementById('close-btn');
         const sendBtn = document.getElementById('send-btn');
         const userInput = document.getElementById('user-input');
+        const typingIndicator = document.getElementById('typing-indicator');
 
         chatIcon.addEventListener('click', function() {
             chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
@@ -294,45 +345,51 @@
             });
         });
 
-       function sendMessage(message) {
-    if (message === "") return;
+        function sendMessage(message) {
+            if (message === "") return;
 
-    userInput.value = '';
+            userInput.value = '';
 
-    appendMessage('user', message);
+            appendMessage('user', message);
 
-    console.log("Sending message:", message);
+            // Show typing indicator
+            typingIndicator.style.display = 'flex';
 
-    // Make an AJAX request to the server using Fetch API
-    fetch('https://dbb7-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: message })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            console.log("Sending message:", message);
+
+            // Make an AJAX request to the server using Fetch API
+            fetch('https://dbb7-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Received response:", data);
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                appendMessage('ai', data.response);
+                // Optionally append a link if provided
+                if (data.link) {
+                    appendMessage('ai', `<a href="${data.link}">${data.link}</a>`);
+                }
+                scrollToBottom();
+            })
+            .catch(error => {
+                console.error("Error during AJAX request:", error);
+                // Hide typing indicator
+                typingIndicator.style.display = 'none';
+                appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
+                scrollToBottom();
+            });
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Received response:", data);
-        appendMessage('ai', data.response);
-        // Optionally append a link if provided
-        if (data.link) {
-            appendMessage('ai', `<a href="${data.link}">${data.link}</a>`);
-        }
-        scrollToBottom();
-    })
-    .catch(error => {
-        console.error("Error during AJAX request:", error);
-        appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
-        scrollToBottom();
-    });
-}
-
 
         function appendMessage(sender, content) {
             const chatBox = document.getElementById('chat-box');
