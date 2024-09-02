@@ -1,5 +1,3 @@
-// JavaScript to create the Chatbot interface with embedded CSS and HTML
-
 // Inject CSS into the page
 const style = document.createElement('style');
 style.textContent = `
@@ -310,12 +308,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         appendMessage('user', message);
 
-        // Simulate an AJAX request (for demonstration purposes)
-        setTimeout(function() {
-            const response = "This is a response from the AI.";
-            appendMessage('ai', response);
-            scrollToBottom();
-        }, 500);
+        // Make an AJAX request to the server
+        $.ajax({
+            url: 'https://a921-121-52-154-72.ngrok-free.app/chat',  // Replace with your server endpoint
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ message: message }),
+            success: function(response) {
+                appendMessage('ai', response.response);
+                // Optionally append a link if provided
+                if (response.link) {
+                    appendMessage('ai', `<a href="${response.link}">${response.link}</a>`);
+                }
+                scrollToBottom();
+            },
+            error: function() {
+                appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
+                scrollToBottom();
+            }
+        });
     }
 
     function appendMessage(sender, content) {
