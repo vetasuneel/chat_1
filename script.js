@@ -1,11 +1,12 @@
- (function () {
+<script>
+        (function () {
             // Inject CSS into the page
             const style = document.createElement('style');
             style.textContent = `
             * {
                 box-sizing: border-box;
             }
-
+    
             .powered-by {
                 text-align: center;
                 font-size: 12px;
@@ -13,13 +14,13 @@
                 margin-top: 6px;
                 padding-bottom: 4px;
             }
-
+    
             .powered-by a {
                 color: #956fd6;
                 text-decoration: none;
                 font-weight: bold;
             }
-
+    
             .chat-icon-container {
                 position: fixed;
                 bottom: 20px;
@@ -29,7 +30,7 @@
                 align-items: flex-end;
                 z-index: 1000;
             }
-
+    
             .chat-icon-container .speech-bubble {
                 background: #956fd6;
                 color: white;
@@ -43,7 +44,7 @@
                 animation: fadeIn 0.5s ease-in-out forwards;
                 opacity: 0;
             }
-
+    
             .chat-icon-container .speech-bubble::before {
                 content: '';
                 position: absolute;
@@ -53,7 +54,7 @@
                 border-style: solid;
                 border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
             }
-
+    
             .chat-icon-container .speech-bubble .close-speech {
                 position: absolute;
                 bottom: 30px;
@@ -62,13 +63,13 @@
                 cursor: pointer;
                 color: white;
             }
-
+    
             @keyframes fadeIn {
                 to {
                     opacity: 1;
                 }
             }
-
+    
             .chat-icon {
                 background: linear-gradient(135deg, #956fd6, #8b5fd4);
                 color: white;
@@ -83,25 +84,25 @@
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
                 transition: all 0.3s ease;
             }
-
+    
             .chat-icon i {
                 font-size: 28px;
                 color: white;
                 transition: transform 0.3s ease;
             }
-
+    
             .chat-icon:hover {
                 background: linear-gradient(135deg, #8b5fd4, #7231a5);
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             }
-
+    
             .chat-container {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
-                width: 350px;
+                width: 380px;
                 max-width: 90%;
-                height: 500px;
+                height: 550px;
                 background-color: #ffffff;
                 border-radius: 15px;
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -113,19 +114,19 @@
                 transition: transform 0.4s ease, opacity 0.4s ease;
                 visibility: hidden;
             }
-
+    
             .chat-container.open {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
-
+    
             .chat-container.close {
                 transform: translateY(100%);
                 opacity: 0;
                 visibility: hidden;
             }
-
+    
             .chat-header {
                 background-color: white;
                 padding: 15px;
@@ -135,14 +136,39 @@
                 font-size: 18px;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                text-align: center;
+                position: relative;
             }
-
+    
+            .chat-header img {
+                width: 120px;
+                padding-top: 8px;
+            }
+    
+            .chat-header .phone-number {
+                position: absolute;
+                left: 50%;
+                top: 7px;
+                transform: translateX(-50%);
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 16px;
+                color: #956fd6;
+            }
+    
+            .chat-header .phone-number i {
+                font-size: 15px;
+                color: black;
+            }
+    
             .chat-header .close-btn {
                 font-size: 27px;
                 cursor: pointer;
                 color: #956fd6;
             }
-
+    
             .chat-box {
                 flex-grow: 1;
                 padding: 15px;
@@ -150,7 +176,7 @@
                 background-color: #f9f9f9;
                 height: 300px;
             }
-
+    
             .chat-input {
                 display: flex;
                 padding: 10px;
@@ -158,7 +184,7 @@
                 border-top: 1px solid #ddd;
                 border-radius: 0 0 15px 15px;
             }
-
+    
             .chat-input input {
                 flex: 1;
                 border: none;
@@ -169,7 +195,7 @@
                 background-color: #fff;
                 box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
             }
-
+    
             .chat-input button {
                 background-color: #956fd6;
                 color: #fff;
@@ -185,30 +211,30 @@
                 justify-content: center;
                 align-items: center;
             }
-
+    
             .chat-input button i {
                 font-size: 16px;
             }
-
+    
             .chat-input button:hover {
                 background-color: #8b5fd4;
                 color: white;
             }
-
+    
             .message {
                 display: flex;
                 align-items: flex-start;
                 margin: 10px 0;
             }
-
+    
             .message.user-message {
                 justify-content: flex-end;
             }
-
+    
             .message.ai-message {
                 justify-content: flex-start;
             }
-
+    
             .message-content {
                 max-width: 75%;
                 padding: 10px;
@@ -219,40 +245,40 @@
                 position: relative;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             }
-
+    
             .message.user-message .message-content {
                 background: linear-gradient(135deg, #956fd6, #8b5fd4);
                 color: #fff;
                 border-radius: 15px 15px 0 15px;
             }
-
+    
             .message.ai-message .message-content {
                 background-color: #f1f1f1;
                 color: #333;
                 border-radius: 15px 15px 15px 0;
             }
-
+    
             .timestamp {
                 font-size: 12px;
                 color: #999;
                 margin-top: 5px;
                 text-align: right;
             }
-
+    
             a {
                 color: #0d6efd;
                 text-decoration: none;
                 font-size: 14px;
                 word-break: break-all;
             }
-
+    
             .predefined-inputs {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
                 margin-bottom: 10px;
             }
-
+    
             .predefined-btn {
                 background: #956fd6;
                 color: white;
@@ -269,7 +295,7 @@
                 position: relative;
                 overflow: hidden;
             }
-
+    
             .predefined-btn::after {
                 content: '';
                 position: absolute;
@@ -283,19 +309,19 @@
                 transition: all 0.3s ease;
                 opacity: 0;
             }
-
+    
             .predefined-btn:hover::after {
                 left: 100%;
                 opacity: 0.3;
             }
-
+    
             .predefined-btn:hover {
                 background-color: #d3d3d3;
                 border: 1px solid #aaa;
                 color: black;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             }
-
+    
             .typing-indicator {
                 display: flex;
                 align-items: center;
@@ -303,7 +329,7 @@
                 height: 10px;
                 margin-top: 8px;
             }
-
+    
             .dot {
                 height: 5px;
                 width: 5px;
@@ -313,19 +339,19 @@
                 display: inline-block;
                 animation: dot-blink 1.5s infinite ease-in-out;
             }
-
+    
             .dot:nth-child(1) {
                 animation-delay: 0s;
             }
-
+    
             .dot:nth-child(2) {
                 animation-delay: 0.3s;
             }
-
+    
             .dot:nth-child(3) {
                 animation-delay: 0.6s;
             }
-
+    
             @keyframes dot-blink {
                 0%, 20% {
                     transform: scale(1);
@@ -340,7 +366,66 @@
                     opacity: 1;
                 }
             }
-        `;
+    
+            /* Modal Styling */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1002;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+    
+            .modal-content {
+                background-color: #fff;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 400px;
+                border-radius: 10px;
+                position: relative;
+            }
+    
+            .modal-content input {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+    
+            .modal-content button {
+                background-color: #956fd6;
+                color: white;
+                border: none;
+                padding: 10px;
+                width: 100%;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+    
+            .modal-content button:hover {
+                background-color: #8b5fd4;
+            }
+    
+            .close-modal {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                font-size: 20px;
+                color: #888;
+                cursor: pointer;
+            }
+    
+            .close-modal:hover {
+                color: #444;
+            }
+            `;
             document.head.appendChild(style);
 
             // Inject HTML into the page
@@ -354,20 +439,32 @@
                     <i class="fas fa-comments"></i>
                 </div>
             </div>
-
+    
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chatbot_test_18/main/idea_pad.png" style="width: 120px; text-align: center;" alt="Header Image"></center>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad/main/idea_pad.png" alt="Header Image"></center><br>
+                    <span class="phone-number">
+                        <i class="fas fa-phone"></i> +1 (555) 123-4567
+                    </span>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
                     <div class="predefined-inputs" id="predefined-inputs">
-                        <div class="predefined-btn" data-message="AI White Label">AI White Label</div>
-                        <div class="predefined-btn" data-message="E-Commerce White Label">E-Commerce White Label</div>
-                        <div class="predefined-btn" data-message="Marketing White Label">Marketing White Label</div>
-                        <div class="predefined-btn" data-message="Affiliate Mega">Affiliate Mega</div>
-                        <div class="predefined-btn" data-message="Amazon Services">Amazon Services</div>
-
+                        <div class="predefined-btn" data-message="AI White Label">
+                            <i class="fas fa-robot"></i> AI White Label
+                        </div>
+                        <div class="predefined-btn" data-message="E-Commerce White Label">
+                            <i class="fas fa-shopping-cart"></i> E-Commerce White Label
+                        </div>
+                        <div class="predefined-btn" data-message="Marketing White Label">
+                            <i class="fas fa-bullhorn"></i> Marketing White Label
+                        </div>
+                        <div class="predefined-btn" data-message="Affiliate Mega">
+                            <i class="fas fa-users"></i> Affiliate Mega
+                        </div>
+                        <div class="predefined-btn" data-message="Amazon Services">
+                            <i class="fab fa-amazon"></i>  Amazon Services
+                        </div>
                     </div>
                 </div>
                 <div class="chat-input">
@@ -378,10 +475,25 @@
                 </div>
                 <div class="powered-by">powered by <a href="https://ideapad.ai/">IdeaPad</a></div>
             </div>
-        `;
+    
+            <!-- Modal to get user details -->
+            <div id="user-info-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span> <!-- Close icon -->
+                    <h3>Please provide your details</h3>
+                    <input type="text" id="modal-name" placeholder="Enter your name" required>
+                    <input type="tel" id="modal-phone" placeholder="Enter your phone number" required>
+                    <button id="submit-user-info">Submit</button>
+                </div>
+            </div>
+            `;
             document.body.insertAdjacentHTML('beforeend', chatHTML);
 
-            // JavaScript functionality
+            let userName = '';
+            let userPhone = '';
+            let firstMessage = '';
+
+            // JavaScript functionality for chat and modal
             document.addEventListener('DOMContentLoaded', function () {
                 const chatIcon = document.getElementById('chat-icon');
                 const chatContainer = document.getElementById('chat-container');
@@ -391,6 +503,11 @@
                 const chatBox = document.getElementById('chat-box');
                 const closeSpeechBtn = document.querySelector('.close-speech');
                 const speechBubble = document.querySelector('.speech-bubble');
+                const modal = document.getElementById('user-info-modal');
+                const submitUserInfoBtn = document.getElementById('submit-user-info');
+                const modalName = document.getElementById('modal-name');
+                const modalPhone = document.getElementById('modal-phone');
+                const closeModal = document.querySelector('.close-modal');
 
                 chatIcon.addEventListener('click', function () {
                     if (chatContainer.classList.contains('open')) {
@@ -414,23 +531,75 @@
                 });
 
                 sendBtn.addEventListener('click', function () {
-                    sendMessage(userInput.value.trim());
+                    handleUserMessage(userInput.value.trim());
                 });
 
                 userInput.addEventListener('keypress', function (e) {
                     if (e.which === 13) {
-                        sendMessage(userInput.value.trim());
-                        return false;
+                        e.preventDefault(); // Prevent the form from submitting
+                        handleUserMessage(userInput.value.trim());
                     }
                 });
 
                 document.querySelectorAll('.predefined-btn').forEach(function (button) {
                     button.addEventListener('click', function () {
                         const message = this.getAttribute('data-message');
-                        sendMessage(message);
-                        document.getElementById('predefined-inputs').remove();
+                        handleUserMessage(message);
                     });
                 });
+
+                // Close modal when clicking the close icon
+                closeModal.addEventListener('click', function () {
+                    modal.style.display = 'none';
+                });
+
+                submitUserInfoBtn.addEventListener('click', function () {
+                    // Capture the name and phone number
+                    const name = modalName.value.trim();
+                    const phone = modalPhone.value.trim();
+
+                    if (name !== '' && phone !== '') {
+                        userName = name;
+                        userPhone = phone;
+                        modal.style.display = 'none'; // Close the modal
+                        // Save the user info
+                        saveUserInfo(userName, userPhone);
+                    } else {
+                        alert('Please fill out both name and phone number');
+                    }
+                });
+
+                function handleUserMessage(message) {
+                    if (message === "") return;
+                    firstMessage = message;
+
+                    // Check if the user has provided name and phone
+                    if (!userName || !userPhone) {
+                        // Show modal if name and phone are not provided
+                        modal.style.display = 'block';
+                    } else {
+                        sendMessage(message);
+                    }
+                }
+
+                function saveUserInfo(name, phone) {
+                    fetch('https://ideapad-chatbot.vercel.app/save_lead', {  // Replace with your Flask route to save lead
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: name, phone_number: phone })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.message);
+                            // Continue with the first message
+                            sendMessage(firstMessage);
+                        })
+                        .catch(error => {
+                            console.error("Error saving user info:", error);
+                        });
+                }
 
                 function sendMessage(message) {
                     if (message === "") return;
@@ -445,12 +614,12 @@
                     console.log("Sending message:", message);
 
                     // Make an AJAX request to the server using Fetch API
-                    fetch('https://dbb7-121-52-154-72.ngrok-free.app/chat', {  // Replace with your server endpoint
+                    fetch('https://ideapad-chatbot.vercel.app/chat', {  // Replace with your Flask route for chat
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ message: message })
+                        body: JSON.stringify({ name: userName, phone: userPhone, message: message })
                     })
                         .then(response => {
                             if (!response.ok) {
@@ -521,3 +690,5 @@
                 }
             });
         })();
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
