@@ -1,4 +1,4 @@
-<script>
+
         (function () {
             // Inject CSS into the page
             const style = document.createElement('style');
@@ -690,4 +690,3 @@
                 }
             });
         })();
-    </script>
