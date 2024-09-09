@@ -442,7 +442,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chat_1/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chat_2/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="phone-number">
                         <i class="fas fa-phone"></i> +1 (555) 123-4567
                     </span>
