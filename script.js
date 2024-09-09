@@ -432,7 +432,7 @@
             const chatHTML = `
             <div class="chat-icon-container">
                 <div class="speech-bubble">
-                    Unleash Potential with Ideapad—Your Success Catalyst! 😎
+                    Launch Your Startup Today! We handle it all for You! 😎
                     <span class="close-speech">&times;</span>
                 </div>
                 <div class="chat-icon" id="chat-icon">
@@ -442,7 +442,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/chat_2/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="phone-number">
                         <i class="fas fa-phone"></i> +1 (555) 123-4567
                     </span>
