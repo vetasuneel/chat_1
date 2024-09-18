@@ -1,5 +1,4 @@
-
-        (function () {
+ (function () {
             // Inject CSS into the page
             const style = document.createElement('style');
             style.textContent = `
@@ -34,7 +33,7 @@
             .chat-icon-container .speech-bubble {
                 background: #956fd6;
                 color: white;
-                padding: 8px 12px;
+                padding: 14px 12px;
                 border-radius: 12px;
                 margin-bottom: 8px;
                 font-size: 14px;
@@ -45,19 +44,10 @@
                 opacity: 0;
             }
     
-            .chat-icon-container .speech-bubble::before {
-                content: '';
-                position: absolute;
-                bottom: -8px;
-                right: 20px;
-                border-width: 8px;
-                border-style: solid;
-                border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-            }
-    
+
             .chat-icon-container .speech-bubble .close-speech {
                 position: absolute;
-                bottom: 30px;
+                bottom: 38px;
                 right: 5px;
                 font-size: 23px;
                 cursor: pointer;
@@ -129,7 +119,7 @@
     
             .chat-header {
                 background-color: white;
-                padding: 15px;
+                padding: 11px;
                 color: black;
                 border-radius: 15px 15px 0 0;
                 font-weight: 600;
@@ -143,13 +133,13 @@
     
             .chat-header img {
                 width: 120px;
-                padding-top: 8px;
+                padding-top: 27px;
             }
     
             .chat-header .phone-number {
                 position: absolute;
                 left: 50%;
-                top: 7px;
+                top: 14px;
                 transform: translateX(-50%);
                 display: flex;
                 align-items: center;
@@ -432,7 +422,7 @@
             const chatHTML = `
             <div class="chat-icon-container">
                 <div class="speech-bubble">
-                    Launch Your Startup Today! We handle it all for You! 😎
+                    Unleash Potential with Ideapad—Your Success Catalyst! 😎
                     <span class="close-speech">&times;</span>
                 </div>
                 <div class="chat-icon" id="chat-icon">
@@ -442,7 +432,10 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_1/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_2/main/idea_pad.png" alt="Header Image"></center><br>
+                    <span class="phone-number">
+                        <i class="fas fa-phone"></i> +1 (555) 123-4567
+                    </span>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -628,11 +621,16 @@
                             console.log("Received response:", data);
                             // Hide typing indicator
                             hideTypingIndicator();
-                            appendMessage('ai', data.response);
-                            // Optionally append a link if provided
-                            if (data.link) {
-                                appendMessage('ai', `<a href="${data.link}">${data.link}</a>`);
-                            }
+
+                            // Check if the response contains a URL and format it as a link
+                            let responseText = data.response;
+                            const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+                            responseText = responseText.replace(urlRegex, function (url) {
+                                return `<a href="${url}" target="_blank">${url}</a>`;
+                            });
+
+                            appendMessage('ai', responseText);
                             scrollToBottom();
                         })
                         .catch(error => {
@@ -643,6 +641,7 @@
                             scrollToBottom();
                         });
                 }
+
 
                 function appendMessage(sender, content) {
                     const messageClass = sender === 'user' ? 'user-message' : 'ai-message';
