@@ -5,6 +5,9 @@
             * {
                 box-sizing: border-box;
             }
+                body{
+                background: white;
+                }
     
             .powered-by {
                 text-align: center;
@@ -12,10 +15,11 @@
                 color: #999;
                 margin-top: 6px;
                 padding-bottom: 4px;
+                
             }
     
             .powered-by a {
-                color: #956fd6;
+                color: #956FD6;
                 text-decoration: none;
                 font-weight: bold;
             }
@@ -31,13 +35,13 @@
             }
     
             .chat-icon-container .speech-bubble {
-                background: #956fd6;
+                background: #956FD6;
                 color: white;
                 padding: 14px 12px;
                 border-radius: 12px;
                 margin-bottom: 8px;
                 font-size: 14px;
-                max-width: 296px;
+                max-width: 300px;
                 text-align: left;
                 position: relative;
                 animation: fadeIn 0.5s ease-in-out forwards;
@@ -51,7 +55,7 @@
                 right: 5px;
                 font-size: 23px;
                 cursor: pointer;
-                color: white;
+                color: black;
             }
     
             @keyframes fadeIn {
@@ -132,8 +136,8 @@
             }
     
             .chat-header img {
-                width: 120px;
-                padding-top: 27px;
+                width: 150px;
+                padding-top: 10px;
             }
     
             .chat-header .phone-number {
@@ -156,7 +160,7 @@
             .chat-header .close-btn {
                 font-size: 27px;
                 cursor: pointer;
-                color: #956fd6;
+                color: #956FD6;
             }
     
             .chat-box {
@@ -170,7 +174,7 @@
             .chat-input {
                 display: flex;
                 padding: 10px;
-                background-color: #f1f1f1;
+                background-color:  #f9f9f9;
                 border-top: 1px solid #ddd;
                 border-radius: 0 0 15px 15px;
             }
@@ -187,7 +191,7 @@
             }
     
             .chat-input button {
-                background-color: #956fd6;
+                background-color:#956FD6;
                 color: #fff;
                 border: none;
                 padding: 10px 20px;
@@ -207,7 +211,7 @@
             }
     
             .chat-input button:hover {
-                background-color: #8b5fd4;
+                background-color: #956FD6;
                 color: white;
             }
     
@@ -237,13 +241,13 @@
             }
     
             .message.user-message .message-content {
-                background: linear-gradient(135deg, #956fd6, #8b5fd4);
+                background: #956FD6;
                 color: #fff;
                 border-radius: 15px 15px 0 15px;
             }
     
             .message.ai-message .message-content {
-                background-color: #f1f1f1;
+                background-color: white;
                 color: #333;
                 border-radius: 15px 15px 15px 0;
             }
@@ -270,7 +274,7 @@
             }
     
             .predefined-btn {
-                background: #956fd6;
+                background: #956FD6;
                 color: white;
                 padding: 10px;
                 border-radius: 15px;
@@ -293,7 +297,7 @@
                 left: -50px;
                 width: 200%;
                 height: 100%;
-                background: rgb(149,111,214);
+                background: #956FD6;
                 color: black;
                 transform: skewX(-45deg);
                 transition: all 0.3s ease;
@@ -390,7 +394,7 @@
             }
     
             .modal-content button {
-                background-color: #956fd6;
+                background-color: #956FD6;
                 color: white;
                 border: none;
                 padding: 10px;
@@ -400,7 +404,7 @@
             }
     
             .modal-content button:hover {
-                background-color: #8b5fd4;
+                background-color: #956FD6;
             }
     
             .close-modal {
@@ -415,27 +419,61 @@
             .close-modal:hover {
                 color: #444;
             }
+
+            /* Shatter (Banner) Styling */
+.shatter {
+    position: fixed;
+    top: -60px;  /* Initially hidden */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: #956FD6;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease-in-out;
+    font-size: 14px;
+    z-index: 2000;
+}
+
+.shatter i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: black;
+}
             `;
             document.head.appendChild(style);
 
             // Inject HTML into the page
             const chatHTML = `
+
+            <!-- Shatter (Banner) HTML -->
+<div id="shatter" class="shatter">
+    <i class="fas fa-phone-alt"></i>
+    <div>
+        <strong>(415) 888-9640</strong><br>
+        Feel free to talk with our AI assistant.
+    </div>
+</div>
+
             <div class="chat-icon-container">
                 <div class="speech-bubble">
-                    Unleash Potential with Ideapad—Your Success Catalyst! 😎
+                    Unleash Potential with ideapad Your Success Catalyst! 😎
                     <span class="close-speech">&times;</span>
                 </div>
-                <div class="chat-icon" id="chat-icon">
-                    <i class="fas fa-comments"></i>
-                </div>
+            <div class="chat-icon" id="chat-icon">
+            <i class="fas fa-comments"></i> 
+        </div>
+
             </div>
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_2/main/idea_pad.png" alt="Header Image"></center><br>
-                    <span class="phone-number">
-                        <i class="fas fa-phone"></i> +1 (555) 123-4567
-                    </span>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_3/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -456,14 +494,18 @@
                             <i class="fab fa-amazon"></i>  Amazon Services
                         </div>
                     </div>
-                </div>
-                <div class="chat-input">
+                </div>                <div class="chat-input">
                     <input type="text" id="user-input" placeholder=" Type your message...">
                     <button id="send-btn">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
-                <div class="powered-by">powered by <a href="https://ideapad.ai/">IdeaPad</a></div>
+                <div class="powered-by mt-3">
+  powered by <a href="https://www.vetaai.com/">
+    <img src="https://calling-app-veta-laca.vercel.app/logo.png" alt="Webspikes Logo" style="width: 18px; height: auto;">
+  </a>
+</div>
+
             </div>
     
             <!-- Modal to get user details -->
@@ -503,13 +545,16 @@
                     if (chatContainer.classList.contains('open')) {
                         chatContainer.classList.remove('open');
                         chatContainer.classList.add('close');
+                        shatter.style.top = '-60px';  // Hide shatter when chat is closed
                     } else {
                         chatContainer.classList.remove('close');
                         chatContainer.classList.add('open');
-                        userInput.focus();
-                        scrollToBottom();
+                        setTimeout(function () {
+                            shatter.style.top = '10px';  // Show the shatter when chat opens
+                        }, 300);  // Delay to avoid immediate appearance
                     }
                 });
+
 
                 closeBtn.addEventListener('click', function () {
                     chatContainer.classList.remove('open');
@@ -677,6 +722,16 @@
                     chatBox.insertAdjacentHTML('beforeend', typingIndicatorHTML);
                     scrollToBottom();
                 }
+
+
+
+                closeBtn.addEventListener('click', function () {
+                    chatContainer.classList.remove('open');
+                    chatContainer.classList.add('close');
+                    shatter.style.top = '-60px';  // Hide the shatter when the chat is closed
+                });
+
+                
 
                 function hideTypingIndicator() {
                     const typingIndicator = document.getElementById('typing-indicator');
