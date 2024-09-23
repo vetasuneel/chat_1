@@ -462,7 +462,7 @@
 
             <div class="chat-icon-container">
                 <div class="speech-bubble">
-                    Unleash Potential with ideapad Your Success Catalyst! 😎
+                    Launch your startup without large capital investment with Ideapad platform! 😎
                     <span class="close-speech">&times;</span>
                 </div>
             <div class="chat-icon" id="chat-icon">
@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_7/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_8/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
