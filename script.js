@@ -423,7 +423,7 @@
             /* Shatter (Banner) Styling */
 .shatter {
     position: fixed;
-    top: -60px;  /* Initially hidden */
+    top: -70px;  /* Initially hidden */
     left: 50%;
     transform: translateX(-50%);
     width: 300px;
@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_3/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_4/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
