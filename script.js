@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_6/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_7/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -728,7 +728,7 @@
                 closeBtn.addEventListener('click', function () {
                     chatContainer.classList.remove('open');
                     chatContainer.classList.add('close');
-                    shatter.style.top = '-60px';  // Hide the shatter when the chat is closed
+                    shatter.style.top = '-70px';  // Hide the shatter when the chat is closed
                 });
 
                 
