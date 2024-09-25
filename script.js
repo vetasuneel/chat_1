@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_8/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_9/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -500,11 +500,10 @@
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
-                <div class="powered-by mt-3">
-  powered by <a href="https://www.vetaai.com/">
-    <img src="https://calling-app-veta-laca.vercel.app/logo.png" alt="Webspikes Logo" style="width: 18px; height: auto;">
-  </a>
+               <div class="powered-by mt-3">
+  powered by <a href="https://ideapad.ai/" style="color: #956FD6;">Ideapad</a>
 </div>
+
 
             </div>
     
