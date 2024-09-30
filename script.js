@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_9/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_10/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -587,21 +587,22 @@
                     modal.style.display = 'none';
                 });
 
-                submitUserInfoBtn.addEventListener('click', function () {
-                    // Capture the name and phone number
-                    const name = modalName.value.trim();
-                    const phone = modalPhone.value.trim();
+submitUserInfoBtn.addEventListener('click', function () {
+    // Capture the name, phone number, and email
+    const name = modalName.value.trim();
+    const phone = modalPhone.value.trim();
+    const email = document.getElementById('modal-email').value.trim(); // Capture email
 
-                    if (name !== '' && phone !== '') {
-                        userName = name;
-                        userPhone = phone;
-                        modal.style.display = 'none'; // Close the modal
-                        // Save the user info
-                        saveUserInfo(userName, userPhone);
-                    } else {
-                        alert('Please fill out both name and phone number');
-                    }
-                });
+    if (name !== '' && phone !== '' && email !== '') {
+        userName = name;  // Save the user name
+        userPhone = phone;
+        modal.style.display = 'none'; // Close the modal
+        // Save the user info including email
+        saveUserInfo(userName, userPhone, email);
+    } else {
+        alert('Please fill out all fields (name, phone, and email)');
+    }
+});
 
                 function handleUserMessage(message) {
                     if (message === "") return;
@@ -616,75 +617,75 @@
                     }
                 }
 
-                function saveUserInfo(name, phone) {
-                    fetch('https://ideapad-chatbot.vercel.app/save_lead', {  // Replace with your Flask route to save lead
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ name: name, phone_number: phone })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data.message);
-                            // Continue with the first message
-                            sendMessage(firstMessage);
-                        })
-                        .catch(error => {
-                            console.error("Error saving user info:", error);
-                        });
-                }
+                function saveUserInfo(name, phone, email) {
+    fetch('https://ideapad-chatbot.vercel.app/save_lead', {  // Replace with your Flask route to save lead
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: name, phone_number: phone, email: email })  // Send email too
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        // Continue with the first message, now userName is available for personalization
+        sendMessage(firstMessage);
+    })
+    .catch(error => {
+        console.error("Error saving user info:", error);
+    });
+}
 
                 function sendMessage(message) {
-                    if (message === "") return;
+    if (message === "") return;
 
-                    userInput.value = '';
+    userInput.value = '';
 
-                    appendMessage('user', message);
+    appendMessage('user', message);
 
-                    // Show typing indicator
-                    showTypingIndicator();
+    // Show typing indicator
+    showTypingIndicator();
 
-                    console.log("Sending message:", message);
+    console.log("Sending message:", message);
 
-                    // Make an AJAX request to the server using Fetch API
-                    fetch('https://ideapad-chatbot.vercel.app/chat', {  // Replace with your Flask route for chat
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ name: userName, phone: userPhone, message: message })
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log("Received response:", data);
-                            // Hide typing indicator
-                            hideTypingIndicator();
+    // Make an AJAX request to the server using Fetch API
+    fetch('https://ideapad-chatbot.vercel.app/chat', {  // Replace with your Flask route for chat
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: userName, phone: userPhone, message: message })  // Include the user's name in the chat request
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Received response:", data);
+        // Hide typing indicator
+        hideTypingIndicator();
 
-                            // Check if the response contains a URL and format it as a link
-                            let responseText = data.response;
-                            const urlRegex = /(https?:\/\/[^\s]+)/g;
+        // Check if the response contains a URL and format it as a link
+        let responseText = data.response;
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
 
-                            responseText = responseText.replace(urlRegex, function (url) {
-                                return `<a href="${url}" target="_blank">${url}</a>`;
-                            });
+        responseText = responseText.replace(urlRegex, function (url) {
+            return `<a href="${url}" target="_blank">${url}</a>`;
+        });
 
-                            appendMessage('ai', responseText);
-                            scrollToBottom();
-                        })
-                        .catch(error => {
-                            console.error("Error during AJAX request:", error);
-                            // Hide typing indicator
-                            hideTypingIndicator();
-                            appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
-                            scrollToBottom();
-                        });
-                }
+        appendMessage('ai', responseText);
+        scrollToBottom();
+    })
+    .catch(error => {
+        console.error("Error during AJAX request:", error);
+        // Hide typing indicator
+        hideTypingIndicator();
+        appendMessage('ai', 'Sorry, something went wrong. Please try again later.');
+        scrollToBottom();
+    });
+}
 
 
                 function appendMessage(sender, content) {
