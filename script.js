@@ -473,7 +473,7 @@
     
             <div class="chat-container" id="chat-container">
                 <div class="chat-header">
-                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_10/main/idea_pad.png" alt="Header Image"></center><br>
+                    <center><img src="https://raw.githubusercontent.com/vetasuneel/ideapad_cdn_11/main/idea_pad.png" alt="Header Image"></center><br>
                     <span class="close-btn" id="close-btn">&times;</span>
                 </div>
                 <div id="chat-box" class="chat-box">
@@ -507,16 +507,17 @@
 
             </div>
     
-            <!-- Modal to get user details -->
-            <div id="user-info-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-modal">&times;</span> <!-- Close icon -->
-                    <h3>Please provide your details</h3>
-                    <input type="text" id="modal-name" placeholder="Enter your name" required>
-                    <input type="tel" id="modal-phone" placeholder="Enter your phone number" required>
-                    <button id="submit-user-info">Submit</button>
-                </div>
-            </div>
+           <!-- Modal to get user details -->
+<div id="user-info-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span> <!-- Close icon -->
+        <h3>Please provide your details</h3>
+        <input type="text" id="modal-name" placeholder="Enter your name" required>
+        <input type="tel" id="modal-phone" placeholder="Enter your phone number" required>
+        <input type="email" id="modal-email" placeholder="Enter your email" required> <!-- New email field -->
+        <button id="submit-user-info">Submit</button>
+    </div>
+</div>
             `;
             document.body.insertAdjacentHTML('beforeend', chatHTML);
 
